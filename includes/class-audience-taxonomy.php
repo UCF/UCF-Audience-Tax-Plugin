@@ -62,6 +62,17 @@ if ( ! class_exists( 'UCF_Audience_Taxonomy' ) ) {
 			register_taxonomy( 'audience', $post_types, self::args( $labels ) );
 		}
 
+		/**
+		 * Generates the labels array for use when registering
+		 * the taxonomy.
+		 * @author Jim Barnes
+		 * @since 1.0.0
+		 * @param array The default label array. Includes:
+		 * 					* singular | default Audience
+		 * 					* plural   | default Audiences
+		 * 					* slug     | default audience
+		 * @return array
+		 */
 		public static function labels( $labels ) {
 			$singular = self::label_or_default( $labels, 'singular' );
 			$plural   = self::label_or_default( $labels, 'plural' );
