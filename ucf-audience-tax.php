@@ -16,6 +16,8 @@ define( 'UCF_AUDIENCE__FILE', __FILE__ );
 
 require_once 'admin/class-audience-config.php';
 require_once 'includes/class-audience-taxonomy.php';
+require_once 'includes/class-audience-common.php';
+require_once 'includes/class-audience-shortcodes.php';
 
 if ( ! function_exists( 'ucf_audience_activation' ) ) {
 	/**
@@ -59,6 +61,7 @@ if ( ! function_exists( 'ucf_audience_init' ) ) {
 		add_action( 'admin_menu', array( 'UCF_Audience_Config', 'add_options_page' ) );
 
 		add_action( 'init', array( 'UCF_Audience_Taxonomy', 'register' ), 10, 0 );
+		add_action( 'init', array( 'UCF_Audience_Shortcodes', 'add_shortcodes' ), 10, 0 );
 	}
 
 	add_action( 'plugins_loaded', 'ucf_audience_init', 10, 0 );
