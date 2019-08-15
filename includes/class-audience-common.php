@@ -3,7 +3,7 @@
  * Common utility functions
  */
 if ( ! class_exists( 'UCF_Audience_Common' ) ) {
-	class UCF_UCF_Audience_Common {
+	class UCF_Audience_Common {
 		/**
 		 * Gets an array of audience terms.
 		 * @author Jim Barnes
@@ -52,7 +52,7 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 				'All',
 				'audience',
 				array(
-					'description' => 'Used when content should be displayed to all audiences.'
+					'description' => 'Used when content should be displayed to all audiences.',
 					'slug'        => 'all'
 				)
 			);
