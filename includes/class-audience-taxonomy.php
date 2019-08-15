@@ -127,8 +127,8 @@ if ( ! class_exists ) {
 				'public'            => true,
 				'show_ui'           => true,
 				'show_admin_column' => true,
-				'show_in_nav_menus' => true,
-				'show_tagcloud'     => true,
+				'show_in_nav_menus' => false,
+				'show_tagcloud'     => false,
 				'rewrite'           => array(
 					'slug'         => $slug,
 					'hierarchical' => true,
