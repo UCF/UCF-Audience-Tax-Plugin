@@ -16,6 +16,8 @@ define( 'UCF_AUDIENCE__FILE', __FILE__ );
 
 require_once 'admin/class-audience-config.php';
 require_once 'includes/class-audience-taxonomy.php';
+require_once 'includes/class-audience-common.php';
+require_once 'includes/class-audience-shortcodes.php';
 
 if ( ! function_exists( 'ucf_audience_activation' ) ) {
 	/**
@@ -27,10 +29,11 @@ if ( ! function_exists( 'ucf_audience_activation' ) ) {
 	function ucf_audience_activation() {
 		UCF_Audience_Config::add_options();
 		UCF_Audience_Taxonomy::register();
+		UCF_Audience_Common::add_default_terms();
 		flush_rewrite_rules();
 	}
 
-	register_activation_hook( 'ucf_audience_activation', UCF_AUDIENCE__FILE );
+	register_activation_hook( UCF_AUDIENCE__FILE, 'ucf_audience_activation' );
 }
 
 if ( ! function_exists( 'ucf_audience_deactivation' ) ) {
@@ -44,6 +47,8 @@ if ( ! function_exists( 'ucf_audience_deactivation' ) ) {
 		UCF_Audience_Config::delete_options();
 		flush_rewrite_rules();
 	}
+
+	register_deactivation_hook( UCF_AUDIENCE__FILE, 'ucf_audience_deactivation' );
 }
 
 if ( ! function_exists( 'ucf_audience_init' ) ) {
@@ -58,7 +63,12 @@ if ( ! function_exists( 'ucf_audience_init' ) ) {
 		add_action( 'admin_init', array( 'UCF_Audience_Config', 'settings_init' ) );
 		add_action( 'admin_menu', array( 'UCF_Audience_Config', 'add_options_page' ) );
 
+		// Init actions
 		add_action( 'init', array( 'UCF_Audience_Taxonomy', 'register' ), 10, 0 );
+		add_action( 'init', array( 'UCF_Audience_Shortcodes', 'add_shortcodes' ), 10, 0 );
+
+		// Content filters
+		add_filter( 'the_content', array( 'UCF_Audience_Common', 'fix_shortcode_autop' ), 10, 1 );
 	}
 
 	add_action( 'plugins_loaded', 'ucf_audience_init', 10, 0 );
