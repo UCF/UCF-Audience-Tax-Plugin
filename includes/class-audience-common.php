@@ -10,7 +10,7 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 		 * @since 1.0.0
 		 * @return array
 		 */
-		public static function get_audience_term_slugs( $args ) {
+		public static function get_audience_term_slugs( $args = array() ) {
 			$args = shortcode_atts( array(
 				'hide_empty' => false,
 				'fields'     => 'id=>slug'
@@ -34,11 +34,35 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 				$usr_audience = self::get_usr_audience();
 			}
 
-			if ( in_array( $usr_audience, $audiences ) ) {
+			if ( in_array( $usr_audience, $audiences ) || in_array( 'all', $audiences ) ) {
 				return true;
 			}
 
 			return false;
+		}
+
+		/**
+		 * Returns the user's audience value.
+		 * @author Jim Barnes
+		 * @since 1.0.0
+		 * @return string
+		 */
+		public static function get_usr_audience() {
+			$usr_audience = 'not-set';
+
+			if ( isset( $_GET['audience'] ) && ! empty( $_GET['audience'] ) ) {
+				$usr_audience = $_GET['audience'];
+			} else if ( isset( $_COOKIE['ucf_audience'] ) && ! empty( $_COOKIE['ucf_audience'] ) ) {
+				$usr_audience = $_COOKIE['ucf_audience'];
+			}
+
+			if ( self::is_valid_audience( $usr_audience ) ) {
+				return $usr_audience;
+			} else {
+				$usr_audience = 'not-set';
+			}
+
+			return $usr_audience;
 		}
 
 		/**
@@ -80,30 +104,6 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 			}
 
 			return false;
-		}
-
-		/**
-		 * Returns the user's audience value.
-		 * @author Jim Barnes
-		 * @since 1.0.0
-		 * @return string
-		 */
-		private static function get_usr_audience() {
-			$usr_audience = 'not-set';
-
-			if ( isset( $_GET['audience'] ) && ! empty( $_GET['audience'] ) ) {
-				$usr_audience = $_GET['audience'];
-			} else if ( isset( $_COOKIE['ucf_audience'] ) && ! empty( $_COOKIE['ucf_audience'] ) ) {
-				$usr_audience = $_COOKIE['ucf_audience'];
-			}
-
-			if ( self::is_valid_audience( $usr_audience ) ) {
-				return $usr_audience;
-			} else {
-				$usr_audience = 'not-set';
-			}
-
-			return $usr_audience;
 		}
 	}
 }

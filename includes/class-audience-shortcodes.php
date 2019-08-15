@@ -46,7 +46,7 @@ if ( ! class_exists( 'UCF_Audience_Shortcodes' ) ) {
 				 * If the variable isn't an array, split the string
 				 * by commas and trim each value.
 				 */
-				$audience = array_map( function( $aud ) {
+				$audiences = array_map( function( $aud ) {
 					return trim( $aud );
 				}, explode( ',', $audiences ) );
 			}
