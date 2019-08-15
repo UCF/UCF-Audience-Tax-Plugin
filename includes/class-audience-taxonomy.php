@@ -59,6 +59,10 @@ if ( ! class_exists( 'UCF_Audience_Taxonomy' ) ) {
 				self::$post_type_defaults
 			);
 
+			$settings_post_types = UCF_Audience_Config::get_option_or_default( 'post_types' );
+
+			$post_types = array_merge( $post_types, $settings_post_types );
+
 			register_taxonomy( 'audience', $post_types, self::args( $labels ) );
 		}
 

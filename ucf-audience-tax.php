@@ -14,6 +14,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define( 'UCF_AUDIENCE__FILE', __FILE__ );
 
+require_once 'admin/class-audience-config.php';
 require_once 'includes/class-audience-taxonomy.php';
 
 if ( ! function_exists( 'ucf_audience_activation' ) ) {
@@ -24,6 +25,7 @@ if ( ! function_exists( 'ucf_audience_activation' ) ) {
 	 * @return void
 	 */
 	function ucf_audience_activation() {
+		UCF_Audience_Config::add_options();
 		UCF_Audience_Taxonomy::register();
 		flush_rewrite_rules();
 	}
@@ -39,6 +41,7 @@ if ( ! function_exists( 'ucf_audience_deactivation' ) ) {
 	 * @return void
 	 */
 	function ucf_audience_deactivation() {
+		UCF_Audience_Config::delete_options();
 		flush_rewrite_rules();
 	}
 }
@@ -51,6 +54,10 @@ if ( ! function_exists( 'ucf_audience_init' ) ) {
 	 * @return void
 	 */
 	function ucf_audience_init() {
+		// Add admin menu item
+		add_action( 'admin_init', array( 'UCF_Audience_Config', 'settings_init' ) );
+		add_action( 'admin_menu', array( 'UCF_Audience_Config', 'add_options_page' ) );
+
 		add_action( 'init', array( 'UCF_Audience_Taxonomy', 'register' ), 10, 0 );
 	}
 
