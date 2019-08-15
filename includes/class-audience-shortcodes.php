@@ -19,7 +19,7 @@ if ( ! class_exists( 'UCF_Audience_Shortcodes' ) ) {
 		 * @return void
 		 */
 		public static function add_shortcodes() {
-			add_shortcode( 'if-audience', array( self, 'sc_if_audience' ) );
+			add_shortcode( 'if-audience', array( 'UCF_Audience_Shortcodes', 'sc_if_audience' ) );
 		}
 
 		/**
