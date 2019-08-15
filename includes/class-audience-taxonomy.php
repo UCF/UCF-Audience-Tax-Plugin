@@ -128,7 +128,11 @@ if ( ! class_exists( 'UCF_Audience_Taxonomy' ) ) {
 		 * Generates the the args used to register the taxonomy
 		 * @author Jim Barnes
 		 * @since 1.0.0
-		 * @param array $labels The array of labels to use
+		 * @param array $labels The labels array which includes (if
+		 * 						not modified in an earler filter):
+		 * 						* singular | default Audience
+		 * 						* plural   | default Audiences
+		 * 						* slug     | default audience
 		 * @return array
 		 */
 		public static function args( $labels ) {
