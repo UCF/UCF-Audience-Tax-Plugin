@@ -92,6 +92,26 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 		}
 
 		/**
+		 * Filter for `the_content` that removes automatic wrapping of
+		 * paragraph tags and breaks around shortcodes.
+		 * @author Jim Barnes
+		 * @since 1.0.0
+		 * @param string $content The content being filtered.
+		 * @return string The filtered content
+		 */
+		public static function fix_shortcode_autop( $content ) {
+			$map = array(
+				'<p>['    => '[',
+				']</p>'   => ']',
+				']<br />' => ']',
+				']<br>'   => ']'
+			);
+
+			$content = strtr( $content, $map );
+			return $content;
+		}
+
+		/**
 		 * Determines if the audience passed in is valid.
 		 * @author Jim Barnes
 		 * @since 1.0.0
