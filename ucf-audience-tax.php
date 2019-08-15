@@ -29,6 +29,7 @@ if ( ! function_exists( 'ucf_audience_activation' ) ) {
 	function ucf_audience_activation() {
 		UCF_Audience_Config::add_options();
 		UCF_Audience_Taxonomy::register();
+		UCF_Audience_Common::add_default_terms();
 		flush_rewrite_rules();
 	}
 

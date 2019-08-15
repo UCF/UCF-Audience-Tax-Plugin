@@ -42,6 +42,32 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 		}
 
 		/**
+		 * Creates default audiences
+		 * @author Jim Barnes
+		 * @since 1.0.0
+		 * @return void
+		 */
+		public static function add_default_terms() {
+			wp_insert_term(
+				'All',
+				'audience',
+				array(
+					'description' => 'Used when content should be displayed to all audiences.'
+					'slug'        => 'all'
+				)
+			);
+
+			wp_insert_term(
+				'Not Set',
+				'audience',
+				array(
+					'description' => 'Used when the user\'s audience is not set.',
+					'slug'        => 'not-set'
+				)
+			);
+		}
+
+		/**
 		 * Determines if the audience passed in is valid.
 		 * @author Jim Barnes
 		 * @since 1.0.0
