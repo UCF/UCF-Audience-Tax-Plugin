@@ -100,14 +100,15 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 		 * @return string The filtered content
 		 */
 		public static function fix_shortcode_autop( $content ) {
-			$map = array(
-				'<p>['    => '[',
-				']</p>'   => ']',
-				']<br />' => ']',
-				']<br>'   => ']'
+			$whitelist = array(
+				'if-audience'
 			);
 
-			$content = strtr( $content, $map );
+			$block = implode( '|', $whitelist );
+
+			$content = preg_replace( "/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br\s?\/?>)?/", "[$2$3]", $content );
+			$content = preg_replace( "/(<p>)?\[\/($block)](<\/p>|<br\s?\/?>)?/", "[/$2]", $content );
+
 			return $content;
 		}
 
