@@ -2,7 +2,7 @@
 /**
  * Defines the UCF Audience Taxonomy
  */
-if ( ! class_exists ) {
+if ( ! class_exists( 'UCF_Audience_Taxonomy' ) ) {
 	/**
 	 * Class that is used to add the Audience taxonomy
 	 * to WordPress.
