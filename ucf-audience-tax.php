@@ -33,7 +33,7 @@ if ( ! function_exists( 'ucf_audience_activation' ) ) {
 		flush_rewrite_rules();
 	}
 
-	register_activation_hook( 'ucf_audience_activation', UCF_AUDIENCE__FILE );
+	register_activation_hook( UCF_AUDIENCE__FILE, 'ucf_audience_activation' );
 }
 
 if ( ! function_exists( 'ucf_audience_deactivation' ) ) {
@@ -47,6 +47,8 @@ if ( ! function_exists( 'ucf_audience_deactivation' ) ) {
 		UCF_Audience_Config::delete_options();
 		flush_rewrite_rules();
 	}
+
+	register_deactivation_hook( UCF_AUDIENCE__FILE, 'ucf_audience_deactivation' );
 }
 
 if ( ! function_exists( 'ucf_audience_init' ) ) {
