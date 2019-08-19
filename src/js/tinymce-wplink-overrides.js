@@ -62,7 +62,7 @@ const addAudienceOption = function () {
    * the options to selected for each existing audience
    */
   const $audienceStr = $link.attr('data-set-audience');
-  if ($audienceStr.length) {
+  if ($audienceStr && $audienceStr.length) {
     const audiences = $audienceStr.split(',');
     for (const audience of audiences) {
       $options.find(`option[value=${audience}]`).attr('selected', true);
