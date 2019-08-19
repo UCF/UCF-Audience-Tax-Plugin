@@ -113,6 +113,16 @@ if ( ! class_exists( 'UCF_Audience_Common' ) ) {
 		}
 
 		/**
+		 * Enqueues front end assets
+		 * @author Jim Barnes
+		 * @since 1.0.0
+		 * @return void
+		 */
+		public static function enqueue_scripts() {
+			wp_enqueue_script( 'ucf_audience_js', UCF_AUDIENCE__JS_URL . '/script.min.js', array( 'jquery' ), UCF_AUDIENCE__VERSION, true );
+		}
+
+		/**
 		 * Determines if the audience passed in is valid.
 		 * @author Jim Barnes
 		 * @since 1.0.0
