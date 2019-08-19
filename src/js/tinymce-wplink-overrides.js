@@ -48,13 +48,19 @@ const addAudienceOption = function () {
     return null;
   };
 
+  // Get the link so we can get current values.
   const $link = getLink();
   let $options = null;
 
+  // This puts the form elements in place
   if ($('#wpse-link-audience').length < 1 && UCF_AUDIENCE) {
     $options = $('#link-options').append(UCF_AUDIENCE.wpse_link_audience);
   }
 
+  /**
+   * Get the current audience values and set
+   * the options to selected for each existing audience
+   */
   const $audienceStr = $link.attr('data-set-audience');
   if ($audienceStr.length) {
     const audiences = $audienceStr.split(',');
@@ -63,6 +69,13 @@ const addAudienceOption = function () {
     }
   }
 
+  /**
+   * Adds the data-set-audience attribute
+   * to the attributes array used to build the link
+   * @author Jim Barnes
+   * @since 1.0.0
+   * @returns {object|array} The attribute object/array
+   */
   wpLink.getAttrs = function () {
     const retval = _getAttrs();
     retval['data-set-audience'] = $('#wpse-link-audience').val();
