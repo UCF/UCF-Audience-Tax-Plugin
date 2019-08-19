@@ -8,7 +8,7 @@ const setAudiences = function ($objects) {
       const parsed = new ParseUrl(href);
       // Audience is already set via a query param. Abort!
       if (parsed.searchObject.hasOwnProperty('audience') && parsed.searchObject.audience) {
-        return;
+        continue;
       }
       if (parsed.searchObject.audience !== undefined || !parsed.searchObject.hasOwnProperty('audience')) {
         parsed.searchObject.audience = audienceStr;
