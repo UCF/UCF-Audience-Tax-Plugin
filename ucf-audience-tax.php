@@ -77,6 +77,7 @@ if ( ! function_exists( 'ucf_audience_init' ) ) {
 		add_filter( 'the_content', array( 'UCF_Audience_Common', 'fix_shortcode_autop' ), 10, 1 );
 
 		// Enqueue Assets
+		add_action( 'wp_enqueue_scripts', array( 'UCF_Audience_Common', 'enqueue_scripts' ), 10, 0 );
 		add_action( 'admin_enqueue_scripts', array( 'UCF_Audience_Admin', 'admin_enqueue_scripts' ), 10, 0 );
 	}
 
