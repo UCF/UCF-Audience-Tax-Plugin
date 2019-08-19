@@ -12,9 +12,15 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
+define( 'UCF_AUDIENCE__VERSION', '1.0.0' );
+
 define( 'UCF_AUDIENCE__FILE', __FILE__ );
+define( 'UCF_AUDIENCE__STATIC_URL', plugin_dir_url( UCF_AUDIENCE__FILE ) . '/static' );
+define( 'UCF_AUDIENCE__CSS_URL', UCF_AUDIENCE__STATIC_URL . '/css' );
+define( 'UCF_AUDIENCE__JS_URL', UCF_AUDIENCE__STATIC_URL . '/js' );
 
 require_once 'admin/class-audience-config.php';
+require_once 'admin/class-audience-admin.php';
 require_once 'includes/class-audience-taxonomy.php';
 require_once 'includes/class-audience-common.php';
 require_once 'includes/class-audience-shortcodes.php';
@@ -69,6 +75,9 @@ if ( ! function_exists( 'ucf_audience_init' ) ) {
 
 		// Content filters
 		add_filter( 'the_content', array( 'UCF_Audience_Common', 'fix_shortcode_autop' ), 10, 1 );
+
+		// Enqueue Assets
+		add_action( 'admin_enqueue_scripts', array( 'UCF_Audience_Admin', 'admin_enqueue_scripts' ), 10, 0 );
 	}
 
 	add_action( 'plugins_loaded', 'ucf_audience_init', 10, 0 );
