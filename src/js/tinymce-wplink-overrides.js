@@ -91,6 +91,6 @@ const addAudienceOption = function () {
   };
 };
 
-jQuery(document).on('wplink-open', (wrap) => {
-  addAudienceOption(wrap);
+jQuery(document).on('wplink-open', () => {
+  addAudienceOption();
 });
