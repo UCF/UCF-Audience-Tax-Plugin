@@ -1,4 +1,4 @@
-/* globals wpLink UCF_AUDIENCE */
+/* globals wpLink ParseUrl UCF_AUDIENCE */
 /**
  * Function that overrides various wpLink
  * functions so that audiences can be selected
@@ -50,11 +50,11 @@ const addAudienceOption = function () {
 
   // Get the link so we can get current values.
   const $link = getLink();
-  let $options = null;
+  const $options = $('#link-options');
 
   // This puts the form elements in place
   if ($('#wpse-link-audience').length < 1 && UCF_AUDIENCE) {
-    $options = $('#link-options').append(UCF_AUDIENCE.wpse_link_audience);
+    $options.append(UCF_AUDIENCE.wpse_link_audience);
   }
 
   /**
@@ -78,7 +78,15 @@ const addAudienceOption = function () {
    */
   wpLink.getAttrs = function () {
     const retval = _getAttrs();
-    retval['data-set-audience'] = $('#wpse-link-audience').val();
+    const audience = $('#wpse-link-audience').val();
+    const href = new ParseUrl(retval.href);
+
+    if (audience) {
+      href.searchObject.audience = audience;
+      retval.href = href.buildUrl();
+      retval['data-set-audience'] = $('#wpse-link-audience').val();
+    }
+
     return retval;
   };
 };

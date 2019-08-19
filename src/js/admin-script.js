@@ -13,4 +13,5 @@
 // Require your plugin's custom script files here
 // see https://www.npmjs.com/package/gulp-include#include-directives
 
+// =require parse-url.js
 // =require tinymce-wplink-overrides.js
